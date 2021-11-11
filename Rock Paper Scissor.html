@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rocks Papers Scissors</title>
+</head>
+<body>
+  <button class="rock">Rock</button>
+  <button class="paper">Paper</button>
+  <button class="scissor">Scissor</button>
+  <div class="container"></div>
+  <script>
+
+    function computerPlay() {
+      let complay = Math.floor(Math.random() * 3) + 1;
+      if (complay === 1) {
+        return "Rock";
+      } else if (complay === 2) {
+        return "Paper" 
+      } else {
+        return "Scissor"
+      }
+    }
+    let playerscore = 0;
+    let computerscore = 0;
+    function playRound(playerSelection, computerSelection) {
+      playerSelection = playerSelection.toUpperCase();
+      computerSelection = computerSelection.toUpperCase();
+      if (playerSelection === computerSelection) {
+        return "Draw!";
+      } else if ((playerSelection === "ROCK" && computerSelection === "PAPER") ||
+                 (playerSelection === "PAPER" && computerSelection === "SCISSOR") ||
+                 (playerSelection === "SCISSOR" && computerSelection === "ROCK"))
+                {
+        computerscore += 1;
+        return "You lose! " + computerSelection.charAt(0) + computerSelection.slice(1).toLowerCase() + " beats " + playerSelection.charAt(0) + playerSelection.slice(1).toLowerCase();
+
+      } else {
+        playerscore += 1;
+        return "You win! " + playerSelection.charAt(0) + playerSelection.slice(1).toLowerCase() + " beats " + computerSelection.charAt(0) + computerSelection.slice(1).toLowerCase();
+      }
+    
+    };
+
+    function winner() {
+      if (playerscore >= 5 && playerscore > computerscore) {
+        return "You won!";
+      } else if (computerscore >= 5 && computerscore > playerscore) {
+        return "Computer won!";
+      } else {
+        return '';
+      }
+    }
+
+    `function game() {
+      const playerSelection = prompt("Your choice", "Rock");
+      const computerSelection = computerPlay();
+      alert(playRound(playerSelection, computerSelection));
+    }` // Useless now
+
+    const container = document.querySelector(".container");
+    const div = document.createElement('div');
+    const score = document.createElement('div');
+    const btns = document.querySelectorAll("button");
+    btns.forEach((button) => {
+      button.addEventListener(`click`, () => {
+
+        div.textContent = playRound(button.className, computerPlay());
+        score.textContent = "You " + playerscore + " - " + computerscore + " Computer! " + winner()
+        container.appendChild(div);
+        container.appendChild(score);
+
+      });
+    });
+
+
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,25 @@
+body {
+    display: flex;
+    flex-direction: column;
+}
+.container {
+    display: flex;
+    min-height: 100vh;
+    margin: 0;
+    flex-direction: column;
+}
+
+.row {
+    display: flex;
+    flex: 1;
+}
+.grid {
+    border: 1px solid black;
+    flex: 1;
+    aspect-ratio: 1;
+}
+
+button {
+    display: flex;
+    align-self: center;
+}

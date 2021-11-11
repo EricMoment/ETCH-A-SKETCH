@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>No Sphere Grid</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container"></div>
+    <script>
+        const container = document.querySelector(".container");
+        const body = document.querySelector("body")
+        function gridgenerate(num) {
+            for (c = 1; c <= num; c++) {
+            const subcontain = document.createElement('div');
+            subcontain.classList.add('row');
+            for (r = 1; r <= num; r++) {
+                const div = document.createElement('div');
+                div.classList.add('grid');
+                subcontain.appendChild(div);
+            }
+            container.appendChild(subcontain);
+        }};
+        function hover() {
+            const grids = document.querySelectorAll(".grid");
+            grids.forEach((grid) => {
+                grid.addEventListener('mouseenter',() => {
+                    grid.style.cssText = "background: " + random_colour(); 
+                });
+            });
+            grids.forEach((grid) => {
+                let val = 255
+                grid.addEventListener('mouseleave',() => {
+                    val = val - 25.5
+                    grid.style.cssText = "background: rgb(" + val+ "," + val + "," + val + ")"; 
+                });
+            })};
+        function random_colour() {
+            var x = Math.floor(Math.random() * 256);
+            var y = Math.floor(Math.random() * 256);
+            var z = Math.floor(Math.random() * 256);
+            return "rgb(" + x + "," + y + "," + z + ")"; 
+        };
+        gridgenerate(16);
+        hover();
+        const btn = document.createElement("button"); //Q4
+        btn.textContent = "Make a new grid"
+        body.insertBefore(btn,container);
+        const button = document.querySelector("button");
+        button.addEventListener('click', () => {
+            const rows = document.querySelectorAll(".row");
+            rows.forEach((row) => {
+                container.removeChild(row);
+            });
+            let size = prompt("Number of squares per side?", "64");
+            while (size > 100) {
+                alert("Size is too big! Type a number under 100.");
+                size = prompt("Number of squares per side?");
+            };
+            gridgenerate(size);
+            hover();
+        });
+
+
+    </script>
+</body>
+</html>
